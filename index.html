@@ -28,12 +28,24 @@
             <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
                 <h1 class="text-3xl md:text-4xl font-bold text-teal-600 mb-4">کارگاه توسعه فردی</h1>
                 <p class="text-gray-600 mb-8 text-lg">برای شروع، یکی از آزمون‌های زیر را انتخاب کنید.</p>
-                <div class="flex flex-col md:flex-row gap-4 justify-center">
-                    <button onclick="showQuiz('gardner')" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 transform hover:scale-105">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="showQuiz('gardner')" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
                         آزمون هوش چندگانه گاردنر
                     </button>
-                    <button onclick="showQuiz('mbti')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 transform hover:scale-105">
+                    <button onclick="showQuiz('mbti')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
                         آزمون شخصیت شناسی MBTI
+                    </button>
+                    <button onclick="showQuiz('bigfive')" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
+                        آزمون شخصیت شناسی Big Five
+                    </button>
+                    <button onclick="showQuiz('disc')" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
+                        آزمون رفتاری DISC
+                    </button>
+                    <button onclick="showQuiz('clifton')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
+                        آزمون CliftonStrengths
+                    </button>
+                    <button onclick="showQuiz('emi')" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 transform hover:scale-105">
+                        شاخص ذهنیت کارآفرینی (EMI)
                     </button>
                 </div>
             </div>
@@ -86,7 +98,126 @@
             </div>
         </div>
 
+        <!-- Big Five Quiz Screen -->
+        <div id="big-five-quiz-screen" class="hidden">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-purple-600 mb-6 text-center">آزمون شخصیت شناسی Big Five</h2>
+                <p class="text-center text-gray-600 mb-6">به هر جمله از ۱ (کاملا مخالفم) تا ۵ (کاملا موافقم) نمره دهید.</p>
+                <div id="big-five-questions" class="space-y-6"></div>
+                <div class="text-center mt-8">
+                    <button onclick="calculateBigFiveResults()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">نمایش نتایج</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Big Five Results Screen -->
+        <div id="big-five-results-screen" class="hidden">
+             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-purple-600 mb-6 text-center">نتایج آزمون Big Five</h2>
+                <p class="text-gray-600 mb-6 text-center">امتیازات شما در پنج بعد اصلی شخصیت نمایش داده شده است.</p>
+                <div id="big-five-results" class="space-y-4"></div>
+                
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-xl font-bold text-purple-700 mb-4 text-center">تفسیر نتایج برای کارآفرینی</h3>
+                    <div id="big-five-interpretation" class="space-y-4 text-gray-700"></div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISC Quiz Screen -->
+        <div id="disc-quiz-screen" class="hidden">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-rose-600 mb-6 text-center">آزمون رفتاری DISC</h2>
+                <p class="text-center text-gray-600 mb-6">در هر سوال، گزینه‌ای را انتخاب کنید که بهترین توصیف از شماست.</p>
+                <div id="disc-questions" class="space-y-8"></div>
+                <div class="text-center mt-8">
+                    <button onclick="calculateDiscResults()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">نمایش نتایج</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISC Results Screen -->
+        <div id="disc-results-screen" class="hidden">
+             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-rose-600 mb-6 text-center">نتایج آزمون DISC</h2>
+                <p class="text-gray-600 mb-6 text-center">امتیازات شما در چهار بعد اصلی رفتاری نمایش داده شده است.</p>
+                <div id="disc-results" class="space-y-4"></div>
+                
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-xl font-bold text-rose-700 mb-4 text-center">تفسیر نتایج برای کارآفرینی</h3>
+                    <div id="disc-interpretation" class="space-y-4 text-gray-700"></div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CliftonStrengths Quiz Screen -->
+        <div id="clifton-quiz-screen" class="hidden">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-amber-600 mb-6 text-center">آزمون CliftonStrengths</h2>
+                <p class="text-center text-gray-600 mb-6">در هر سوال، گزینه‌ای را انتخاب کنید که بهترین توصیف از شماست.</p>
+                <div id="clifton-questions" class="space-y-8"></div>
+                <div class="text-center mt-8">
+                    <button onclick="calculateCliftonResults()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">نمایش نتایج</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CliftonStrengths Results Screen -->
+        <div id="clifton-results-screen" class="hidden">
+             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-amber-600 mb-6 text-center">نتایج آزمون CliftonStrengths</h2>
+                <p class="text-gray-600 mb-6 text-center">۵ استعداد برتر شما شناسایی شده است. تمرکز بر این استعدادهای ذاتی می‌تواند مسیر موفقیت شما را هموارتر کند.</p>
+                <div id="clifton-results" class="space-y-4"></div>
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMI Quiz Screen -->
+        <div id="emi-quiz-screen" class="hidden">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-cyan-600 mb-6 text-center">شاخص ذهنیت کارآفرینی (EMI)</h2>
+                <p class="text-center text-gray-600 mb-6">به هر جمله از ۱ (کاملا مخالفم) تا ۵ (کاملا موافقم) نمره دهید.</p>
+                <div id="emi-questions" class="space-y-6"></div>
+                <div class="text-center mt-8">
+                    <button onclick="calculateEmiResults()" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">نمایش نتایج</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMI Results Screen -->
+        <div id="emi-results-screen" class="hidden">
+             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-cyan-600 mb-6 text-center">نتایج شاخص ذهنیت کارآفرینی</h2>
+                <p class="text-gray-600 mb-6 text-center">امتیازات شما در ابعاد کلیدی ذهنیت کارآفرینی نمایش داده شده است.</p>
+                <div id="emi-results" class="space-y-4"></div>
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Coming Soon Modal -->
+    <div id="coming-soon-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-2xl shadow-lg text-center max-w-sm mx-auto">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">به زودی!</h3>
+            <p class="text-gray-600 mb-6">این آزمون در حال حاضر در دسترس نیست. ما در حال کار بر روی افزودن آن هستیم.</p>
+            <p id="coming-soon-test-name" class="font-semibold text-gray-700 mb-6"></p>
+            <button onclick="hideComingSoon()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg">باشه</button>
+        </div>
+    </div>
+
 
     <script>
         // --- Data for Quizzes ---
@@ -221,6 +352,184 @@
             }
         ];
 
+        const bigFiveQuiz = [
+            { trait: 'گشودگی به تجربه (Openness)', questions: [
+                { q: "من تخیل واضحی دارم.", positive: true },
+                { q: "من حقایق عینی را به ایده‌های انتزاعی ترجیح می‌دهم.", positive: false },
+                { q: "از امتحان کردن چیزهای جدید و متفاوت لذت می‌برم.", positive: true },
+                { q: "من خیلی خلاق نیستم.", positive: false }
+            ]},
+            { trait: 'وظیفه‌شناسی (Conscientiousness)', questions: [
+                { q: "من همیشه آماده هستم.", positive: true },
+                { q: "من اغلب وسایلم را نامرتب رها می‌کنم.", positive: false },
+                { q: "من به جزئیات توجه می‌کنم.", positive: true },
+                { q: "تمایل به به تعویق انداختن کارها دارم.", positive: false }
+            ]},
+            { trait: 'برون‌گرایی (Extraversion)', questions: [
+                { q: "من در مهمانی‌ها مرکز توجه هستم.", positive: true },
+                { q: "ترجیح می‌دهم وقتم را تنها بگذرانم.", positive: false },
+                { q: "در کنار دیگران احساس راحتی می‌کنم.", positive: true },
+                { q: "من اغلب در گروه‌ها ساکت هستم.", positive: false }
+            ]},
+            { trait: 'سازگاری (Agreeableness)', questions: [
+                { q: "من با احساسات دیگران همدردی می‌کنم.", positive: true },
+                { q: "من واقعاً به مشکلات دیگران علاقه‌ای ندارم.", positive: false },
+                { q: "من قلب مهربانی دارم.", positive: true },
+                { q: "من تمایل به توهین به دیگران دارم.", positive: false }
+            ]},
+            { trait: 'روان‌رنجوری / ثبات هیجانی (Neuroticism)', questions: [
+                { q: "من به راحتی دچار استرس می‌شوم.", positive: true },
+                { q: "من بیشتر اوقات آرام هستم.", positive: false },
+                { q: "من نگران همه چیز هستم.", positive: true },
+                { q: "من به ندرت احساس غم یا ناراحتی می‌کنم.", positive: false }
+            ]}
+        ];
+
+        const discQuiz = [
+            { prompt: "وقتی با یک چالش جدید روبرو می‌شوم...", options: [
+                { text: "با قاطعیت و مستقیم با آن مقابله می‌کنم.", style: 'D' },
+                { text: "با اشتیاق دیگران را برای حل آن درگیر می‌کنم.", style: 'I' },
+                { text: "با صبر و آرامش به دنبال یک راه‌حل پایدار می‌گردم.", style: 'S' },
+                { text: "با دقت تمام جوانب را تحلیل می‌کنم.", style: 'C' }
+            ]},
+            { prompt: "در تصمیم‌گیری‌ها، من تمایل دارم...", options: [
+                { text: "سریع و نتیجه‌گرا باشم.", style: 'D' },
+                { text: "به حس درونی و نظرات دیگران تکیه کنم.", style: 'I' },
+                { text: "مطمئن شوم که همه با تصمیم موافق هستند.", style: 'S' },
+                { text: "بر اساس داده‌ها و حقایق تصمیم بگیرم.", style: 'C' }
+            ]},
+            { prompt: "سبک ارتباطی من اینگونه است:", options: [
+                { text: "رک، صریح و مختصر.", style: 'D' },
+                { text: "گرم، متقاعدکننده و پرانرژی.", style: 'I' },
+                { text: "شنونده خوب، صبور و حمایت‌گر.", style: 'S' },
+                { text: "دقیق، رسمی و مبتنی بر واقعیت.", style: 'C' }
+            ]},
+            { prompt: "فشار کاری باعث می‌شود من...", options: [
+                { text: "کنترل اوضاع را بیشتر در دست بگیرم.", style: 'D' },
+                { text: "بیشتر صحبت کنم و سعی کنم دیگران را آرام کنم.", style: 'I' },
+                { text: "در خود فرو بروم و به دنبال ثبات باشم.", style: 'S' },
+                { text: "بیش از حد محتاط و نگران اشتباهات شوم.", style: 'C' }
+            ]},
+            { prompt: "بزرگترین ترس من در محیط کار این است:", options: [
+                { text: "از من سوء استفاده شود یا کنترل را از دست بدهم.", style: 'D' },
+                { text: "طرد شوم یا مورد تایید دیگران نباشم.", style: 'I' },
+                { text: "امنیت و ثبات خود را از دست بدهم.", style: 'S' },
+                { text: "کارم مورد انتقاد قرار گیرد یا دقیق نباشد.", style: 'C' }
+            ]},
+            { prompt: "من دیگران را اینگونه ترغیب می‌کنم:", options: [
+                { text: "با ایجاد چالش و رقابت.", style: 'D' },
+                { text: "با ایجاد روابط دوستانه و جذابیت شخصی.", style: 'I' },
+                { text: "با نشان دادن صداقت و قابل اعتماد بودن.", style: 'S' },
+                { text: "با ارائه منطق و داده‌های دقیق.", style: 'C' }
+            ]},
+            { prompt: "در یک پروژه گروهی، من معمولاً...", options: [
+                { text: "رهبری را بر عهده می‌گیرم و اهداف را مشخص می‌کنم.", style: 'D' },
+                { text: "به تیم انگیزه می‌دهم و فضای مثبتی ایجاد می‌کنم.", style: 'I' },
+                { text: "از اعضای تیم حمایت می‌کنم و به دنبال هماهنگی هستم.", style: 'S' },
+                { text: "روی جزئیات، کیفیت و پیروی از استانداردها تمرکز می‌کنم.", style: 'C' }
+            ]},
+            { prompt: "اولویت اصلی من در کار این است:", options: [
+                { text: "رسیدن به نتایج.", style: 'D' },
+                { text: "تعامل و همکاری با دیگران.", style: 'I' },
+                { text: "حمایت و ثبات.", style: 'S' },
+                { text: "دقت و کیفیت.", style: 'C' }
+            ]},
+            { prompt: "من در محیطی بهترین عملکرد را دارم که...", options: [
+                { text: "به من استقلال و کنترل بدهد.", style: 'D' },
+                { text: "فرصت‌های اجتماعی و کار گروهی داشته باشد.", style: 'I' },
+                { text: "قابل پیش‌بینی و هماهنگ باشد.", style: 'S' },
+                { text: "قوانین و انتظارات واضحی داشته باشد.", style: 'C' }
+            ]},
+            { prompt: "وقتی با دیگران مخالفم...", options: [
+                { text: "به طور مستقیم و قاطعانه نظر خود را بیان می‌کنم.", style: 'D' },
+                { text: "سعی می‌کنم با گفتگو و متقاعد کردن به توافق برسم.", style: 'I' },
+                { text: "معمولاً برای حفظ آرامش از تقابل پرهیز می‌کنم.", style: 'S' },
+                { text: "با ارائه شواهد و مدارک از موضع خود دفاع می‌کنم.", style: 'C' }
+            ]},
+            { prompt: "معمولاً دیگران مرا اینگونه توصیف می‌کنند:", options: [
+                { text: "مصمم و با اراده.", style: 'D' },
+                { text: "خوش‌بین و اجتماعی.", style: 'I' },
+                { text: "آرام و قابل اعتماد.", style: 'S' },
+                { text: "وظیفه‌شناس و دقیق.", style: 'C' }
+            ]},
+            { prompt: "من از این نوع کارها بیشتر لذت می‌برم:", options: [
+                { text: "کارهایی که چالش‌برانگیز و رقابتی هستند.", style: 'D' },
+                { text: "کارهایی که شامل تعامل با افراد جدید باشد.", style: 'I' },
+                { text: "کارهایی که در یک روال مشخص و پایدار انجام شوند.", style: 'S' },
+                { text: "کارهایی که نیاز به تحلیل و حل مسئله دارند.", style: 'C' }
+            ]}
+        ];
+
+        const cliftonStrengthsQuiz = [
+            // Executing Themes
+            { a: { text: "من همیشه به دنبال انجام کارها و رسیدن به اهداف هستم.", theme: "Achiever" }, b: { text: "من دوست دارم همه چیز را سازماندهی و برنامه‌ریزی کنم.", theme: "Arranger" } },
+            { a: { text: "من به ارزش‌های اصلی خود پایبندم و آنها تصمیماتم را هدایت می‌کنند.", theme: "Belief" }, b: { text: "من دوست دارم با همه منصفانه رفتار کنم و قوانین برایم مهم است.", theme: "Consistency" } },
+            { a: { text: "من قبل از اقدام، تمام جوانب و ریسک‌ها را با دقت بررسی می‌کنم.", theme: "Deliberative" }, b: { text: "من به طور طبیعی منظم و دقیق هستم.", theme: "Discipline" } },
+            { a: { text: "من روی یک هدف متمرکز می‌شوم و تا رسیدن به آن دست از کار نمی‌کشم.", theme: "Focus" }, b: { text: "من احساس مسئولیت شدیدی نسبت به تعهداتم دارم.", theme: "Responsibility" } },
+            { a: { text: "من از رفع مشکلات و بازگرداندن چیزها به حالت اول لذت می‌برم.", theme: "Restorative" }, b: { text: "من همیشه به دنبال انجام کارها و رسیدن به اهداف هستم.", theme: "Achiever" } },
+
+            // Influencing Themes
+            { a: { text: "من به راحتی کنترل اوضاع را به دست می‌گیرم و تصمیم‌گیری می‌کنم.", theme: "Command" }, b: { text: "من در صحبت کردن و متقاعد کردن دیگران مهارت دارم.", theme: "Communication" } },
+            { a: { text: "من دوست دارم در رقابت‌ها پیروز شوم.", theme: "Competition" }, b: { text: "من به راحتی با افراد جدید ارتباط برقرار می‌کنم و شبکه‌سازی می‌کنم.", theme: "Woo" } },
+            { a: { text: "من به پتانسیل خودم و دیگران باور دارم و به دنبال بهترین‌ها هستم.", theme: "Maximizer" }, b: { text: "من اعتماد به نفس بالایی در توانایی‌های خود دارم.", theme: "Self-Assurance" } },
+            { a: { text: "من برایم مهم است که دیده شوم و تاثیرگذار باشم.", theme: "Significance" }, b: { text: "من در صحبت کردن و متقاعد کردن دیگران مهارت دارم.", theme: "Communication" } },
+
+            // Relationship Building Themes
+            { a: { text: "من به راحتی با شرایط جدید سازگار می‌شوم.", theme: "Adaptability" }, b: { text: "من به دنبال ایجاد ارتباطات عمیق و معنادار با دیگران هستم.", theme: "Relator" } },
+            { a: { text: "من به دنبال ارتباط و نقاط مشترک بین چیزها و افراد هستم.", theme: "Connectedness" }, b: { text: "من از کمک به رشد و پیشرفت دیگران لذت می‌برم.", theme: "Developer" } },
+            { a: { text: "من در درک احساسات دیگران و همدلی با آنها خوب هستم.", theme: "Empathy" }, b: { text: "من به دنبال هماهنگی و پرهیز از درگیری هستم.", theme: "Harmony" } },
+            { a: { text: "من دوست دارم همه را در گروه شامل کنم تا کسی احساس تنهایی نکند.", theme: "Includer" }, b: { text: "من استعدادهای منحصر به فرد هر فرد را تشخیص می‌دهм.", theme: "Individualization" } },
+
+            // Strategic Thinking Themes
+            { a: { text: "من از تحلیل داده‌ها و پیدا کردن الگوها لذت می‌برم.", theme: "Analytical" }, b: { text: "من همیشه به گذشته نگاه می‌کنم تا آینده را بهتر بفهمم.", theme: "Context" } },
+            { a: { text: "من به آینده فکر می‌کنم و چشم‌اندازهای بزرگی در ذهن دارم.", theme: "Futuristic" }, b: { text: "من عاشق یادگیری و کسب دانش جدید هستم.", theme: "Learner" } },
+            { a: { text: "من از ایده‌پردازی و طوفان فکری لذت می‌برم.", theme: "Ideation" }, b: { text: "من اطلاعات و دانش زیادی را جمع‌آوری و نگهداری می‌کنم.", theme: "Input" } },
+            { a: { text: "من به طور طبیعی کنجکاو هستم و سوالات زیادی می‌پرسم.", theme: "Intellection" }, b: { text: "من به سرعت الگوها را می‌بینم و سناریوهای مختلف را برای رسیدن به هدف بررسی می‌کنم.", theme: "Strategic" } }
+        ];
+        
+        const emiQuiz = [
+            {
+                trait: 'نیاز به پیشرفت',
+                questions: [
+                    { q: "من اهداف چالش‌برانگیز برای خودم تعیین می‌کنم.", positive: true },
+                    { q: "از موقعیت‌هایی که نیاز به تلاش زیاد ندارند، راضی هستم.", positive: false },
+                    { q: "همیشه به دنبال راه‌هایی برای بهتر انجام دادن کارها هستم.", positive: true }
+                ]
+            },
+            {
+                trait: 'ریسک‌پذیری',
+                questions: [
+                    { q: "من ترجیح می‌دهم مسیرهای مطمئن و آزمایش‌شده را انتخاب کنم.", positive: false },
+                    { q: "برای رسیدن به یک پاداش بزرگ، حاضرم ریسک‌های حساب‌شده بکنم.", positive: true },
+                    { q: "عدم قطعیت مرا مضطرب می‌کند.", positive: false }
+                ]
+            },
+            {
+                trait: 'نوآوری',
+                questions: [
+                    { q: "من از ایده‌پردازی برای محصولات یا خدمات جدید لذت می‌برم.", positive: true },
+                    { q: "ترجیح می‌دهم از روش‌های سنتی برای حل مشکلات استفاده کنم.", positive: false },
+                    { q: "اغلب به دنبال راه‌های خلاقانه برای انجام کارها هستم.", positive: true }
+                ]
+            },
+            {
+                trait: 'خودکارآمدی',
+                questions: [
+                    { q: "من به توانایی خودم برای غلبه بر چالش‌ها اطمینان دارم.", positive: true },
+                    { q: "وقتی با یک مانع بزرگ روبرو می‌شوم، به راحتی ناامید می‌شوم.", positive: false },
+                    { q: "من معتقدم که می‌توانم به هر هدفی که برای خودم تعیین کنم، برسم.", positive: true }
+                ]
+            },
+            {
+                trait: 'پشتکار',
+                questions: [
+                    { q: "من به راحتی از کارهای دشوار دست نمی‌کشم.", positive: true },
+                    { q: "اگر در تلاش اول موفق نشوم، معمولاً آن را رها می‌کنم.", positive: false },
+                    { q: "شکست‌ها را به عنوان فرصت‌های یادگیری می‌بینم.", positive: true }
+                ]
+            }
+        ];
+
         // --- DOM Elements ---
         const screens = {
             home: document.getElementById('home-screen'),
@@ -228,10 +537,17 @@
             gardnerResults: document.getElementById('gardner-results-screen'),
             mbtiQuiz: document.getElementById('mbti-quiz-screen'),
             mbtiResults: document.getElementById('mbti-results-screen'),
+            bigFiveQuiz: document.getElementById('big-five-quiz-screen'),
+            bigFiveResults: document.getElementById('big-five-results-screen'),
+            discQuiz: document.getElementById('disc-quiz-screen'),
+            discResults: document.getElementById('disc-results-screen'),
+            cliftonQuiz: document.getElementById('clifton-quiz-screen'),
+            cliftonResults: document.getElementById('clifton-results-screen'),
+            emiQuiz: document.getElementById('emi-quiz-screen'),
+            emiResults: document.getElementById('emi-results-screen'),
         };
 
         // --- App Logic ---
-
         function hideAllScreens() {
             for (const key in screens) {
                 screens[key].classList.add('hidden');
@@ -241,7 +557,6 @@
         function goHome() {
             hideAllScreens();
             screens.home.classList.remove('hidden');
-            window.scrollTo(0, 0);
         }
         
         function showQuiz(quizType) {
@@ -252,42 +567,63 @@
             } else if (quizType === 'mbti') {
                 renderMbtiQuiz();
                 screens.mbtiQuiz.classList.remove('hidden');
+            } else if (quizType === 'bigfive') {
+                renderBigFiveQuiz();
+                screens.bigFiveQuiz.classList.remove('hidden');
+            } else if (quizType === 'disc') {
+                renderDiscQuiz();
+                screens.discQuiz.classList.remove('hidden');
+            } else if (quizType === 'clifton') {
+                renderCliftonStrengthsQuiz();
+                screens.cliftonQuiz.classList.remove('hidden');
+            } else if (quizType === 'emi') {
+                renderEmiQuiz();
+                screens.emiQuiz.classList.remove('hidden');
             }
             window.scrollTo(0, 0);
         }
         
-        // --- Gardner Quiz Functions ---
+        function showComingSoon(testName) {
+            document.getElementById('coming-soon-test-name').innerText = testName;
+            document.getElementById('coming-soon-modal').classList.remove('hidden');
+        }
 
+        function hideComingSoon() {
+            document.getElementById('coming-soon-modal').classList.add('hidden');
+        }
+
+        // --- Gardner Quiz Functions ---
         function renderGardnerQuiz() {
             const container = document.getElementById('gardner-questions');
             container.innerHTML = '';
-            let questionNumber = 1;
-            gardnerQuiz.forEach((category, categoryIndex) => {
+            gardnerQuiz.forEach((category, index) => {
                 const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'p-4 border border-gray-200 rounded-lg';
-                let questionsHtml = `<h3 class="text-xl font-semibold text-teal-700 mb-4">${category.title}</h3>`;
+                categoryDiv.innerHTML = `<h3 class="text-xl font-bold text-gray-800 mb-4">${category.title}</h3>`;
+                const questionsDiv = document.createElement('div');
+                questionsDiv.className = 'space-y-4';
                 
                 category.questions.forEach((q, qIndex) => {
-                    const questionId = `g-q-${categoryIndex}-${qIndex}`;
-                    questionsHtml += `
-                        <div class="mb-4">
-                            <p class="mb-2 text-gray-700">${questionNumber}. ${q}</p>
-                            <div class="flex items-center justify-center flex-wrap gap-x-4">
-                                <span class="text-sm text-gray-500">خیلی کم</span>
-                                ${[1, 2, 3, 4, 5].map(val => `
-                                    <label for="${questionId}-${val}" class="flex items-center cursor-pointer">
-                                        <input type="radio" id="${questionId}-${val}" name="${questionId}" value="${val}" class="form-radio h-5 w-5 text-teal-600" required>
-                                        <span class="mr-2">${val}</span>
-                                    </label>
-                                `).join('')}
-                                <span class="text-sm text-gray-500">خیلی زیاد</span>
+                    const questionId = `g-q-${index}-${qIndex}`;
+                    questionsDiv.innerHTML += `
+                        <div class="p-4 border border-gray-200 rounded-lg">
+                            <p class="mb-3 text-gray-700">${q}</p>
+                            <div class="flex justify-between items-center text-sm text-gray-500" dir="ltr">
+                                <span>خیلی کم</span>
+                                <div class="flex space-x-2">
+                                    ${[1,2,3,4,5].map(val => `
+                                        <label for="${questionId}-${val}" class="flex flex-col items-center cursor-pointer">
+                                            <input type="radio" name="${questionId}" id="${questionId}-${val}" value="${val}" class="form-radio h-5 w-5 text-teal-600" required>
+                                            <span class="mt-1">${val}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                                <span>خیلی زیاد</span>
                             </div>
                         </div>
                     `;
-                    questionNumber++;
                 });
 
-                categoryDiv.innerHTML = questionsHtml;
+                categoryDiv.appendChild(questionsDiv);
                 container.appendChild(categoryDiv);
             });
         }
@@ -295,17 +631,18 @@
         function calculateGardnerResults() {
             let scores = Array(gardnerQuiz.length).fill(0);
             let allAnswered = true;
-
-            gardnerQuiz.forEach((category, categoryIndex) => {
+            gardnerQuiz.forEach((category, index) => {
+                let categoryScore = 0;
                 category.questions.forEach((q, qIndex) => {
-                    const questionId = `g-q-${categoryIndex}-${qIndex}`;
+                    const questionId = `g-q-${index}-${qIndex}`;
                     const selected = document.querySelector(`input[name="${questionId}"]:checked`);
                     if (selected) {
-                        scores[categoryIndex] += parseInt(selected.value);
+                        categoryScore += parseInt(selected.value);
                     } else {
                         allAnswered = false;
                     }
                 });
+                scores[index] = categoryScore;
             });
 
             if (!allAnswered) {
@@ -316,14 +653,15 @@
             hideAllScreens();
             const resultsContainer = document.getElementById('gardner-results');
             resultsContainer.innerHTML = '';
-            
-            const maxScore = Math.max(...scores);
 
-            const sortedResults = scores.map((score, index) => ({
+            const resultsData = scores.map((score, index) => ({
                 score,
-                title: gardnerQuiz[index].title.split('(')[0].trim()
-            })).sort((a, b) => b.score - a.score);
+                title: gardnerQuiz[index].title
+            }));
+            
+            const maxScore = Math.max(...resultsData.map(r => r.score));
 
+            const sortedResults = resultsData.sort((a, b) => b.score - a.score);
 
             sortedResults.forEach(result => {
                  const isMax = result.score === maxScore;
@@ -333,7 +671,7 @@
                  resultDiv.innerHTML = `
                     <div class="flex justify-between items-center mb-1">
                         <span class="font-bold ${isMax ? 'text-teal-700' : 'text-gray-800'}">${result.title}</span>
-                        <span class="font-semibold ${isMax ? 'text-teal-700' : 'text-gray-800'}">${result.score} / 25</span>
+                        <span class="font-semibold ${isMax ? 'text-teal-700' : 'text-gray-800'}" dir="ltr">${result.score} / 25</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-4">
                         <div class="${isMax ? 'bg-teal-500' : 'bg-teal-400'}" style="width: ${barWidth}%; height:100%; border-radius: 9999px;"></div>
@@ -345,109 +683,554 @@
             screens.gardnerResults.classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-        
+
         // --- MBTI Quiz Functions ---
-        
         function renderMbtiQuiz() {
             const container = document.getElementById('mbti-questions');
             container.innerHTML = '';
-            let globalQuestionIndex = 0;
-            mbtiQuiz.forEach((category) => {
-                 const categoryDiv = document.createElement('div');
-                 categoryDiv.className = 'p-4 border border-gray-200 rounded-lg';
-                 let questionsHtml = `<h3 class="text-xl font-semibold text-indigo-700 mb-4">${category.title}</h3>`;
-                 
-                 category.questions.forEach((q, qIndex) => {
-                     const questionId = `m-q-${globalQuestionIndex}`;
-                     questionsHtml += `
-                        <div class="mb-5 p-3 bg-gray-50 rounded-md">
-                           <p class="mb-3 text-gray-700 font-medium">${q.q}</p>
-                           <div class="space-y-2">
-                               <label for="${questionId}-a" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-indigo-50">
-                                   <input type="radio" id="${questionId}-a" name="${questionId}" value="A" class="form-radio h-5 w-5 text-indigo-600" required>
-                                   <span class="rtl-radio-label text-gray-600">${q.a}</span>
-                               </label>
-                               <label for="${questionId}-b" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-indigo-50">
-                                   <input type="radio" id="${questionId}-b" name="${questionId}" value="B" class="form-radio h-5 w-5 text-indigo-600">
-                                   <span class="rtl-radio-label text-gray-600">${q.b}</span>
-                               </label>
-                           </div>
+            mbtiQuiz.forEach((dim, dimIndex) => {
+                const dimDiv = document.createElement('div');
+                dimDiv.innerHTML = `<h3 class="text-xl font-bold text-gray-800 mb-4">${dim.title}</h3>`;
+                const questionsDiv = document.createElement('div');
+                questionsDiv.className = 'space-y-6';
+
+                dim.questions.forEach((q, qIndex) => {
+                    const questionId = `m-q-${dimIndex}-${qIndex}`;
+                    questionsDiv.innerHTML += `
+                        <div class="p-4 border border-gray-200 rounded-lg">
+                            <p class="mb-3 text-gray-700">${q.q}</p>
+                            <div class="space-y-2">
+                                <label for="${questionId}-a" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-indigo-50">
+                                    <input type="radio" id="${questionId}-a" name="${questionId}" value="a" class="form-radio h-5 w-5 text-indigo-600" required>
+                                    <span class="rtl-radio-label text-gray-600">${q.a}</span>
+                                </label>
+                                <label for="${questionId}-b" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-indigo-50">
+                                    <input type="radio" id="${questionId}-b" name="${questionId}" value="b" class="form-radio h-5 w-5 text-indigo-600" required>
+                                    <span class="rtl-radio-label text-gray-600">${q.b}</span>
+                                </label>
+                            </div>
                         </div>
-                     `;
-                     globalQuestionIndex++;
-                 });
-                 categoryDiv.innerHTML = questionsHtml;
-                 container.appendChild(categoryDiv);
+                    `;
+                });
+                dimDiv.appendChild(questionsDiv);
+                container.appendChild(dimDiv);
             });
         }
-
+        
         function calculateMbtiResults() {
-            const results = { I: 0, E: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-            let totalQuestions = 0;
-            let answeredQuestions = 0;
-            
-            mbtiQuiz.forEach((category) => {
-                totalQuestions += category.questions.length;
-            });
-            
-            const checkedRadios = document.querySelectorAll('#mbti-quiz-screen input[type="radio"]:checked');
-            answeredQuestions = checkedRadios.length;
+            let personalityType = '';
+            let allAnswered = true;
 
-            if (answeredQuestions < totalQuestions) {
+            mbtiQuiz.forEach((dim, dimIndex) => {
+                let aCount = 0;
+                let bCount = 0;
+                dim.questions.forEach((q, qIndex) => {
+                    const questionId = `m-q-${dimIndex}-${qIndex}`;
+                    const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                    if (selected) {
+                        if (selected.value === 'a') aCount++;
+                        else bCount++;
+                    } else {
+                        allAnswered = false;
+                    }
+                });
+                
+                if (dim.dimension === 'IE') personalityType += (aCount > bCount) ? 'I' : 'E';
+                if (dim.dimension === 'SN') personalityType += (aCount > bCount) ? 'S' : 'N';
+                if (dim.dimension === 'TF') personalityType += (aCount > bCount) ? 'T' : 'F';
+                if (dim.dimension === 'JP') personalityType += (aCount > bCount) ? 'J' : 'P';
+            });
+
+            if (!allAnswered) {
                 alert('لطفاً به تمام سوالات پاسخ دهید.');
                 return;
             }
 
-            let type = '';
-
-            // IE
-            let countA_IE = 0;
-            for (let i = 0; i < 5; i++) {
-                if (document.querySelector(`input[name="m-q-${i}"]:checked`).value === 'A') countA_IE++;
-            }
-            type += (countA_IE > 2) ? 'I' : 'E';
-
-            // SN
-            let countA_SN = 0;
-            for (let i = 5; i < 10; i++) {
-                if (document.querySelector(`input[name="m-q-${i}"]:checked`).value === 'A') countA_SN++;
-            }
-            type += (countA_SN > 2) ? 'S' : 'N';
-            
-            // TF
-            let countA_TF = 0;
-            for (let i = 10; i < 15; i++) {
-                if (document.querySelector(`input[name="m-q-${i}"]:checked`).value === 'A') countA_TF++;
-            }
-            type += (countA_TF > 2) ? 'T' : 'F';
-
-            // JP
-            let countA_JP = 0;
-            for (let i = 15; i < 20; i++) {
-                if (document.querySelector(`input[name="m-q-${i}"]:checked`).value === 'A') countA_JP++;
-            }
-            type += (countA_JP > 2) ? 'J' : 'P';
-            
-            const interpretations = {
-                 'ENTP': 'کارآفرین خلاق',
-                 'ISTJ': 'برنامه‌ریز دقیق',
-                 'ENFP': 'نوآور و انگیزه‌بخش',
-                 'ESTJ': 'رهبر و استراتژیک',
-                 'ENTJ': 'رهبر و استراتژیک',
-                 'ISTP': 'تحلیل‌گر و حل‌کننده مسائل',
-                 'INTP': 'تحلیل‌گر و حل‌کننده مسائل',
-                 'ISFJ': 'حمایت‌گر و تیم‌محور',
-                 'ESFJ': 'حمایت‌گر و تیم‌محور'
-            };
-
             hideAllScreens();
-            document.getElementById('mbti-result-type').textContent = type;
-            document.getElementById('mbti-result-interpretation').textContent = interpretations[type] || 'مناسب برای مسیر کارآفرینی';
+            document.getElementById('mbti-result-type').innerText = personalityType;
+            const interpretations = {
+                'ISTJ': 'بازرس: فردی ساکت، جدی، دقیق و مسئولیت‌پذیر.',
+                'ISFJ': 'محافظ: فردی ساکت، دوستانه، مسئولیت‌پذیر و وظیفه‌شناس.',
+                'INFJ': 'مشاور: فردی درون‌نگر، خلاق، حساس و باانگیزه.',
+                'INTJ': 'معمار: فردی مبتکر، منطقی، استراتژیک و مستقل.',
+                'ISTP': 'صنعتگر: فردی منطقی، کنجکاو، عمل‌گرا و مشاهده‌گر.',
+                'ISFP': 'هنرمند: فردی ساکت، حساس، مهربان و انعطاف‌پذیر.',
+                'INFP': 'میانجی: فردی ایده‌آل‌گرا، کنجکاو، وفادار و خلاق.',
+                'INTP': 'متفکر: فردی منطقی، کنجکاو، تحلیل‌گر و مستقل.',
+                'ESTP': 'کارآفرین: فردی پرانرژی، عمل‌گرا، ریسک‌پذیر و اجتماعی.',
+                'ESFP': 'بازیگر: فردی برون‌گرا، شاد، خودانگیخته و دوست‌داشتنی.',
+                'ENFP': 'قهرمان: فردی خلاق، پرشور، خوش‌بین و اجتماعی.',
+                'ENTP': 'مباحثه‌گر: فردی مبتکر، کنجکاو، استراتژیک و پرانرژی.',
+                'ESTJ': 'مجری: فردی عمل‌گرا، منظم، قاطع و مسئولیت‌پذیر.',
+                'ESFJ': 'سفیر: فردی اجتماعی، مهربان، وظیفه‌شناس و حمایتگر.',
+                'ENFJ': 'پیشرو: فردی کاریزماتیک، الهام‌بخش، حساس و رهبر.',
+                'ENTJ': 'فرمانده: فردی قاطع، استراتژیک، رهبر و هدفمند.'
+            };
+            document.getElementById('mbti-result-interpretation').innerText = interpretations[personalityType] || 'تفسیر این تیپ شخصیتی اضافه خواهد شد.';
             screens.mbtiResults.classList.remove('hidden');
             window.scrollTo(0, 0);
+        }
+
+        // --- Big Five Quiz Functions ---
+        function renderBigFiveQuiz() {
+            const container = document.getElementById('big-five-questions');
+            container.innerHTML = '';
+            bigFiveQuiz.forEach((trait, traitIndex) => {
+                const traitDiv = document.createElement('div');
+                traitDiv.className = "p-4 border border-gray-200 rounded-lg";
+                traitDiv.innerHTML = `<h3 class="text-xl font-bold text-gray-800 mb-4">${trait.trait}</h3>`;
+                const questionsDiv = document.createElement('div');
+                questionsDiv.className = 'space-y-4';
+
+                trait.questions.forEach((q, qIndex) => {
+                    const questionId = `bf-q-${traitIndex}-${qIndex}`;
+                    questionsDiv.innerHTML += `
+                        <div class="p-4 border-t border-gray-100">
+                             <p class="mb-3 text-gray-700">${q.q}</p>
+                            <div class="flex justify-between items-center text-sm text-gray-500" dir="ltr">
+                                <span>کاملا مخالفم</span>
+                                <div class="flex space-x-2">
+                                    ${[1,2,3,4,5].map(val => `
+                                        <label for="${questionId}-${val}" class="flex flex-col items-center cursor-pointer">
+                                            <input type="radio" name="${questionId}" id="${questionId}-${val}" value="${val}" class="form-radio h-5 w-5 text-purple-600" required>
+                                            <span class="mt-1">${val}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                                <span>کاملا موافقم</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                traitDiv.appendChild(questionsDiv);
+                container.appendChild(traitDiv);
+            });
+        }
+        
+        function calculateBigFiveResults() {
+            let scores = Array(bigFiveQuiz.length).fill(0);
+            let allAnswered = true;
+            bigFiveQuiz.forEach((trait, traitIndex) => {
+                let traitScore = 0;
+                trait.questions.forEach((q, qIndex) => {
+                    const questionId = `bf-q-${traitIndex}-${qIndex}`;
+                    const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                    if (selected) {
+                        let value = parseInt(selected.value);
+                        if (!q.positive) {
+                            value = 6 - value;
+                        }
+                        traitScore += value;
+                    } else {
+                        allAnswered = false;
+                    }
+                });
+                scores[traitIndex] = traitScore;
+            });
+
+            if (!allAnswered) {
+                alert('لطفاً به تمام سوالات پاسخ دهید.');
+                return;
+            }
+
+            hideAllScreens();
+            const resultsContainer = document.getElementById('big-five-results');
+            resultsContainer.innerHTML = '';
+
+            const resultsData = scores.map((score, index) => ({
+                score,
+                trait: bigFiveQuiz[index].trait
+            }));
+
+            resultsData.forEach(result => {
+                 const barWidth = ((result.score - 4) / 16) * 100; 
+                 const resultDiv = document.createElement('div');
+                 resultDiv.className = 'p-4 rounded-lg bg-gray-100';
+                 resultDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-gray-800">${result.trait}</span>
+                        <span class="font-semibold text-gray-800" dir="ltr">${result.score} / 20</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div class="bg-purple-500" style="width: ${barWidth}%; height:100%; border-radius: 9999px;"></div>
+                    </div>
+                 `;
+                 resultsContainer.appendChild(resultDiv);
+            });
+
+            displayBigFiveInterpretation(resultsData);
+
+            screens.bigFiveResults.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function displayBigFiveInterpretation(results) {
+            const interpretationContainer = document.getElementById('big-five-interpretation');
+            interpretationContainer.innerHTML = '';
+
+            const interpretations = {
+                'گشودگی به تجربه (Openness)': {
+                    high: "<strong>گشودگی بالا:</strong> امتیاز بالای شما نشان‌دهنده کنجکاوی، خلاقیت و تمایل به تجربه‌های جدید است. این ویژگی برای یک کارآفرین بسیار ارزشمند است، زیرا به نوآوری، شناسایی فرصت‌های جدید و سازگاری با تغییرات سریع بازار کمک می‌کند.",
+                    low: "<strong>گشودگی پایین:</strong> امتیاز پایین شما به معنای ترجیح دادن روش‌های سنتی و قابل پیش‌بینی است. اگرچه این ویژگی به ثبات کسب‌وکار کمک می‌کند، اما ممکن است در برابر نوآوری مقاومت ایجاد کند. همکاری با افراد خلاق می‌تواند این جنبه را متعادل کند."
+                },
+                'وظیفه‌شناسی (Conscientiousness)': {
+                    high: "<strong>وظیفه‌شناسی بالا:</strong> این امتیاز یکی از قوی‌ترین پیش‌بینی‌کننده‌های موفقیت کارآفرینی است. این نشان‌دهنده نظم، مسئولیت‌پذیری و اراده قوی شما برای دستیابی به اهداف است. شما احتمالاً در برنامه‌ریزی و اجرای دقیق ایده‌ها عالی عمل می‌کنید.",
+                    low: "<strong>وظیفه‌شناسی پایین:</strong> این امتیاز ممکن است به معنای انعطاف‌پذیری بیشتر باشد. با این حال، می‌تواند منجر به چالش‌هایی در مدیریت زمان و پیگیری پروژه‌ها شود. ایجاد سیستم‌های منظم و استفاده از ابزارهای مدیریتی برای شما ضروری است."
+                },
+                'برون‌گرایی (Extraversion)': {
+                    high: "<strong>برون‌گرایی بالا:</strong> امتیاز بالای شما نشان می‌دهد که از تعامل با دیگران انرژی می‌گیرید. این ویژگی برای شبکه‌سازی، جذب سرمایه‌گذار، فروش و رهبری تیم بسیار مفید است. شما به طور طبیعی می‌توانید دیگران را ترغیب کنید.",
+                    low: "<strong>برون‌گرایی پایین (درون‌گرایی):</strong> این امتیاز به این معناست که شما انرژی خود را از درون می‌گیرید. درون‌گراها می‌توانند رهبران فوق‌العاده‌ای باشند، زیرا اغلب عمیق‌تر فکر می‌کنند. با این حال، باید آگاهانه برای شبکه‌سازی انرژی بگذارید."
+                },
+                'سازگاری (Agreeableness)': {
+                    high: "<strong>سازگاری بالا:</strong> این امتیاز نشان‌دهنده روحیه همکاری و همدلی است که به ایجاد یک فرهنگ تیمی مثبت کمک می‌کند. با این حال، مراقب باشید که این ویژگی مانع از گرفتن تصمیمات سخت یا مذاکرات قاطع نشود.",
+                    low: "<strong>سازگاری پایین:</strong> این امتیاز به معنای رویکردی رقابتی‌تر و قاطعانه‌تر است. این می‌تواند در مذاکرات و تصمیم‌گیری‌های دشوار یک مزیت باشد. با این حال، باید مراقب باشید که به روابط تیمی آسیب نرساند."
+                },
+                'روان‌رنجوری / ثبات هیجانی (Neuroticism)': {
+                    high: "<strong>روان‌رنجوری بالا (ثبات هیجانی پایین):</strong> این امتیاز نشان می‌دهد که شما ممکن است بیشتر مستعد استرس و اضطراب باشید. مسیر کارآفرینی پر از فراز و نشیب است، بنابراین توسعه راهکارهای مدیریت استرس برای شما اولویت بالایی دارد.",
+                    low: "<strong>روان‌رنجوری پایین (ثبات هیجانی بالا):</strong> این امتیاز یک مزیت بزرگ برای کارآفرینان است. این نشان می‌دهد که شما در مواجهه با فشار و عدم قطعیت، آرام و مقاوم هستید و می‌توانید تصمیمات منطقی بگیرید."
+                }
+            };
+            
+            results.forEach(result => {
+                const interpretationDiv = document.createElement('div');
+                interpretationDiv.className = 'p-3 bg-gray-50 rounded-lg';
+                const interpretationText = result.score >= 12 ? interpretations[result.trait].high : interpretations[result.trait].low;
+                interpretationDiv.innerHTML = interpretationText;
+                interpretationContainer.appendChild(interpretationDiv);
+            });
+        }
+
+        // --- DISC Quiz Functions ---
+        function renderDiscQuiz() {
+            const container = document.getElementById('disc-questions');
+            container.innerHTML = '';
+            discQuiz.forEach((q, qIndex) => {
+                const questionId = `d-q-${qIndex}`;
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'p-4 border border-gray-200 rounded-lg';
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <label for="${questionId}-${optIndex}" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-rose-50">
+                            <input type="radio" id="${questionId}-${optIndex}" name="${questionId}" value="${opt.style}" class="form-radio h-5 w-5 text-rose-600" required>
+                            <span class="rtl-radio-label text-gray-600">${opt.text}</span>
+                        </label>
+                    `;
+                });
+
+                questionDiv.innerHTML = `
+                    <p class="mb-3 text-gray-700 font-medium">${qIndex + 1}. ${q.prompt}</p>
+                    <div class="space-y-2">${optionsHtml}</div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function calculateDiscResults() {
+            const scores = { D: 0, I: 0, S: 0, C: 0 };
+            const totalQuestions = discQuiz.length;
+            const answeredQuestions = document.querySelectorAll('#disc-quiz-screen input[type="radio"]:checked');
+
+            if (answeredQuestions.length < totalQuestions) {
+                alert('لطفاً به تمام سوالات پاسخ دهید.');
+                return;
+            }
+
+            answeredQuestions.forEach(input => {
+                scores[input.value]++;
+            });
+
+            hideAllScreens();
+            const resultsContainer = document.getElementById('disc-results');
+            resultsContainer.innerHTML = '';
+
+            const resultsData = [
+                { style: 'Dominance (D)', name: 'سلطه‌گر', score: scores.D, color: 'bg-red-500' },
+                { style: 'Influence (I)', name: 'تاثیرگذار', score: scores.I, color: 'bg-yellow-500' },
+                { style: 'Steadiness (S)', name: 'باثبات', score: scores.S, color: 'bg-green-500' },
+                { style: 'Conscientiousness (C)', name: 'وظیفه‌شناس', score: scores.C, color: 'bg-blue-500' }
+            ];
+
+            const maxPossibleScore = discQuiz.length;
+
+            resultsData.forEach(result => {
+                const barWidth = (result.score / maxPossibleScore) * 100;
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'p-4 rounded-lg bg-gray-100';
+                resultDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-gray-800">${result.name} - ${result.style}</span>
+                        <span class="font-semibold text-gray-800" dir="ltr">${result.score} / ${maxPossibleScore}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div class="${result.color}" style="width: ${barWidth}%; height:100%; border-radius: 9999px;"></div>
+                    </div>
+                `;
+                resultsContainer.appendChild(resultDiv);
+            });
+
+            displayDiscInterpretation(scores);
+            screens.discResults.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function displayDiscInterpretation(scores) {
+            const interpretationContainer = document.getElementById('disc-interpretation');
+            interpretationContainer.innerHTML = '';
+
+            const dominantStyle = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+            const interpretations = {
+                D: "<strong>سبک غالب شما (Dominance - D):</strong> شما فردی قاطع، نتیجه‌گرا و مصمم هستید. به عنوان یک کارآفرین، این ویژگی به شما کمک می‌کند تا به سرعت تصمیم بگیرید، رهبری کنید و پروژه‌ها را به جلو ببرید. نقطه قوت شما توانایی حل مشکلات پیچیده و تمرکز بر اهداف است. مراقب باشید که بی‌صبری شما باعث نادیده گرفتن نظرات تیم نشود.",
+                I: "<strong>سبک غالب شما (Influence - I):</strong> شما فردی اجتماعی، خوش‌بین و متقاعدکننده هستید. این ویژگی برای یک کارآفرین در شبکه‌سازی، بازاریابی، فروش و ایجاد یک فرهنگ کاری مثبت فوق‌العاده است. شما در انگیزه دادن به دیگران و ساختن روابط قوی هستید. چالش شما ممکن است تمرکز بر جزئیات و پیگیری کارها تا انتها باشد.",
+                S: "<strong>سبک غالب شما (Steadiness - S):</strong> شما فردی صبور، قابل اعتماد و حامی هستید. به عنوان یک کارآفرین، این ویژگی به شما در ساختن یک تیم وفادار و یک محیط کاری باثبات کمک می‌کند. شما شنونده‌ای عالی و همکار قابل اتکایی هستید. مراقب باشید که مقاومت شما در برابر تغییرات ناگهانی، مانع نوآوری و رشد سریع نشود.",
+                C: "<strong>سبک غالب شما (Conscientiousness - C):</strong> شما فردی دقیق، تحلیل‌گر و وظیفه‌شناس هستید. این ویژگی برای کارآفرینانی که در حوزه‌های فنی، مالی یا کیفی فعالیت می‌کنند، یک مزیت بزرگ است. شما در برنامه‌ریزی دقیق، تضمین کیفیت و پیروی از استانداردها عالی عمل می‌کنید. چالش شما ممکن است کمال‌گرایی بیش از حد و کندی در تصمیم‌گیری باشد."
+            };
+
+            const interpretationDiv = document.createElement('div');
+            interpretationDiv.className = 'p-4 bg-rose-50 text-rose-800 rounded-lg text-center';
+            interpretationDiv.innerHTML = interpretations[dominantStyle];
+            interpretationContainer.appendChild(interpretationDiv);
+        }
+
+        // --- CliftonStrengths Quiz Functions ---
+        function renderCliftonStrengthsQuiz() {
+            const container = document.getElementById('clifton-questions');
+            container.innerHTML = '';
+            cliftonStrengthsQuiz.forEach((pair, index) => {
+                const questionId = `cs-q-${index}`;
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'p-4 border border-gray-200 rounded-lg';
+                
+                questionDiv.innerHTML = `
+                    <p class="mb-3 text-gray-700 font-medium">کدام جمله شما را بهتر توصیف می‌کند؟</p>
+                    <div class="space-y-2">
+                         <label for="${questionId}-a" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-amber-50">
+                            <input type="radio" id="${questionId}-a" name="${questionId}" value="${pair.a.theme}" class="form-radio h-5 w-5 text-amber-600" required>
+                            <span class="rtl-radio-label text-gray-600">${pair.a.text}</span>
+                        </label>
+                        <label for="${questionId}-b" class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-amber-50">
+                            <input type="radio" id="${questionId}-b" name="${questionId}" value="${pair.b.theme}" class="form-radio h-5 w-5 text-amber-600" required>
+                            <span class="rtl-radio-label text-gray-600">${pair.b.text}</span>
+                        </label>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function calculateCliftonResults() {
+            const scores = {};
+            const totalQuestions = cliftonStrengthsQuiz.length;
+            const answeredQuestions = document.querySelectorAll('#clifton-quiz-screen input[type="radio"]:checked');
+
+            if (answeredQuestions.length < totalQuestions) {
+                alert('لطفاً به تمام سوالات پاسخ دهید.');
+                return;
+            }
+            
+            const allThemes = new Set();
+            cliftonStrengthsQuiz.forEach(pair => {
+                allThemes.add(pair.a.theme);
+                allThemes.add(pair.b.theme);
+            });
+            allThemes.forEach(theme => scores[theme] = 0);
+
+            answeredQuestions.forEach(input => {
+                scores[input.value]++;
+            });
+            
+            const sortedStrengths = Object.entries(scores).sort(([, a], [, b]) => b - a);
+            const top5 = sortedStrengths.slice(0, 5);
+            
+            hideAllScreens();
+            displayCliftonStrengthsInterpretation(top5);
+            screens.cliftonResults.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function displayCliftonStrengthsInterpretation(top5) {
+            const container = document.getElementById('clifton-results');
+            container.innerHTML = '';
+            
+            const interpretations = {
+                'Achiever': { name: 'دست‌یابنده', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما انگیزه درونی برای انجام کارها و رسیدن به اهداف دارید. به عنوان کارآفرین، این استعداد به شما کمک می‌کند تا استارت‌آپ را به جلو ببرید و به نقاط عطف کلیدی برسید.' },
+                'Arranger': { name: 'تنظیم‌کننده', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما در سازماندهی و هماهنگی منابع برای رسیدن به بهترین نتیجه مهارت دارید. این استعداد برای مدیریت یک تیم در حال رشد و منابع محدود استارت‌آپ حیاتی است.' },
+                'Belief': { name: 'باور', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما دارای ارزش‌های بنیادین و ماموریتی مشخص هستید. این استعداد به شما کمک می‌کند تا یک فرهنگ سازمانی قوی و یک برند معتبر بسازید.' },
+                'Consistency': { name: 'ثبات', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما به عدالت و رفتار یکسان با همه اهمیت می‌دهید. این به ایجاد سیستم‌های قابل پیش‌بینی و یک محیط کاری عادلانه کمک می‌کند.' },
+                'Deliberative': { name: 'آینده‌نگر', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما در شناسایی ریسک‌ها و موانع احتمالی مهارت دارید. این استعداد برای تصمیم‌گیری‌های محتاطانه و مدیریت بحران در استارت‌آپ ضروری است.' },
+                'Discipline': { name: 'نظم', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما از نظم و ساختار لذت می‌برید و می‌توانید در هرج‌ومرج، نظم ایجاد کنید. این برای ایجاد فرآیندهای کارآمد در کسب‌وکار شما مهم است.' },
+                'Focus': { name: 'تمرکز', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما می‌توانید روی یک هدف متمرکز شوید و از انحرافات جلوگیری کنید. این استعداد به شما کمک می‌کند تا تیم را روی اولویت‌های اصلی متمرکز نگه دارید.' },
+                'Responsibility': { name: 'مسئولیت‌پذیری', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما به تعهدات خود پایبند هستید و دیگران می‌توانند روی شما حساب کنند. این ویژگی اعتماد سرمایه‌گذاران و مشتریان را جلب می‌کند.' },
+                'Restorative': { name: 'اصلاح‌گر', domain: 'اجرایی', color: 'bg-red-100 text-red-800', desc: 'شما از حل مشکلات لذت می‌برید. به عنوان کارآفرین، شما دائماً با چالش‌ها روبرو هستید و این استعداد به شما کمک می‌کند تا راه‌حل‌های موثر پیدا کنید.' },
+                'Command': { name: 'فرماندهی', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما قاطع هستید و در موقعیت‌های دشوار کنترل را به دست می‌گیرید. این استعداد برای رهبری در بحران و تصمیم‌گیری‌های سریع حیاتی است.' },
+                'Communication': { name: 'ارتباط', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما در انتقال ایده‌ها به شکلی جذاب و قابل فهم مهارت دارید. این برای ارائه به سرمایه‌گذار، بازاریابی و الهام بخشیدن به تیم ضروری است.' },
+                'Competition': { name: 'رقابت', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما انگیزه زیادی برای پیروزی دارید. این استعداد شما را وادار می‌کند تا برای بهترین بودن در بازار تلاش کنید و از رقبا پیشی بگیرید.' },
+                'Maximizer': { name: 'بهینه‌ساز', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما روی نقاط قوت تمرکز می‌کنید و به دنبال تعالی هستید. این به شما کمک می‌کند تا بهترین افراد را استخدام کرده و محصولی با کیفیت بالا ارائه دهید.' },
+                'Self-Assurance': { name: 'خودباوری', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما به توانایی‌های خود ایمان دارید و می‌توانید با اطمینان ریسک کنید. این اعتماد به نفس برای هدایت یک استارت‌آپ در مسیرهای نامشخص ضروری است.' },
+                'Significance': { name: 'اهمیت', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما می‌خواهید تاثیر بزرگی بگذارید و دیده شوید. این انگیزه شما را به سمت ایجاد یک برند قوی و شناخته‌شده سوق می‌دهد.' },
+                'Woo': { name: 'جذابیت', domain: 'تاثیرگذاری', color: 'bg-yellow-100 text-yellow-800', desc: 'شما از ملاقات با افراد جدید و جلب نظر آنها لذت می‌برید. این استعداد برای شبکه‌سازی، فروش و ایجاد مشارکت‌های استراتژیک عالی است.' },
+                'Adaptability': { name: 'انعطاف‌پذیری', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما با جریان پیش می‌روید و به راحتی با تغییرات سازگار می‌شوید. در محیط پرنوسان استارت‌آپ، این یک مزیت بزرگ برای مدیریت بحران است.' },
+                'Connectedness': { name: 'ارتباط', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما به ارتباط بین همه چیز باور دارید. این به شما کمک می‌کند تا یک ماموریت بزرگ‌تر برای کسب‌وکار خود تعریف کنید که فراتر از سودآوری باشد.' },
+                'Developer': { name: 'پرورش‌دهنده', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما از شناسایی و پرورش پتانسیل در دیگران لذت می‌برید. این استعداد به شما کمک می‌کند تا یک تیم قوی و وفادار بسازید.' },
+                'Empathy': { name: 'همدلی', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما می‌توانید احساسات دیگران را درک کنید. این برای درک نیازهای مشتریان و مدیریت یک تیم با انگیزه بسیار مهم است.' },
+                'Harmony': { name: 'هماهنگی', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما به دنبال اجماع و پرهیز از درگیری هستید. این به ایجاد یک محیط کاری آرام و مشارکتی کمک می‌کند.' },
+                'Includer': { name: 'مشارکت‌دهنده', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما تلاش می‌کنید تا همه احساس کنند بخشی از تیم هستند. این برای ایجاد یک فرهنگ سازمانی متنوع و فراگیر ضروری است.' },
+                'Individualization': { name: 'فردی‌سازی', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما به ویژگی‌های منحصر به فرد هر فرد توجه می‌کنید. این به شما کمک می‌کند تا وظایف را به درستی به افراد محول کنید و از نقاط قوت آنها استفاده کنید.' },
+                'Relator': { name: 'رابطه‌ساز', domain: 'روابط', color: 'bg-green-100 text-green-800', desc: 'شما به دنبال ایجاد روابط عمیق و اصیل هستید. این به ایجاد وفاداری در بین کارکنان و مشتریان کلیدی کمک می‌کند.' },
+                'Analytical': { name: 'تحلیل‌گر', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما به دنبال داده و منطق هستید. این استعداد به شما کمک می‌کند تا تصمیمات مبتنی بر داده بگیرید و از فرضیات اثبات‌نشده دوری کنید.' },
+                'Context': { name: 'گذشته‌نگر', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما با بررسی گذشته، حال را درک می‌کنید. این به شما کمک می‌کند تا از اشتباهات گذشته درس بگیرید و تصمیمات بهتری بگیرید.' },
+                'Futuristic': { name: 'آینده‌نگر', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما از فکر کردن به آینده و آنچه ممکن است الهام می‌گیرید. این استعداد برای ایجاد یک چشم‌انداز جذاب برای استارت‌آپ شما ضروری است.' },
+                'Ideation': { name: 'ایده‌پرداز', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما مجذوب ایده‌ها هستید. این استعداد به شما کمک می‌کند تا راه‌حل‌های نوآورانه برای مشکلات پیدا کنید و کسب‌وکار خود را متمایز کنید.' },
+                'Input': { name: 'جمع‌آورنده', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما کنجکاو هستید و اطلاعات زیادی جمع‌آوری می‌کنید. این به شما کمک می‌کند تا همیشه از روندهای بازار و دانش جدید مطلع باشید.' },
+                'Intellection': { name: 'متفکر', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما از تفکر عمیق لذت می‌برید. این استعداد به شما کمک می‌کند تا استراتژی‌های پیچیده را توسعه دهید و جوانب مختلف یک مشکل را بسنجید.' },
+                'Learner': { name: 'یادگیرنده', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما علاقه زیادی به یادگیری دارید. در دنیای سریع استارت‌آپ‌ها، این توانایی برای سازگاری و کسب مهارت‌های جدید حیاتی است.' },
+                'Strategic': { name: 'استراتژیست', domain: 'تفکر استراتژیک', color: 'bg-blue-100 text-blue-800', desc: 'شما می‌توانید الگوها را ببینید و مسیرهای جایگزین را برای رسیدن به هدف پیدا کنید. این استعداد برای تدوین استراتژی کسب‌وکار و پیشی گرفتن از رقبا ضروری است.' },
+            };
+
+            top5.forEach(([theme, score], index) => {
+                const details = interpretations[theme];
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `p-4 rounded-lg border-l-4 ${details.color.replace('bg', 'border')}`;
+                resultDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-bold">${index + 1}. ${details.name} (${theme})</h3>
+                        <span class="text-sm font-semibold px-2 py-1 rounded-full ${details.color}">${details.domain}</span>
+                    </div>
+                    <p class="text-gray-700">${details.desc}</p>
+                `;
+                container.appendChild(resultDiv);
+            });
+        }
+        
+        // --- EMI Quiz Functions ---
+        function renderEmiQuiz() {
+            const container = document.getElementById('emi-questions');
+            container.innerHTML = '';
+            emiQuiz.forEach((trait, traitIndex) => {
+                const traitDiv = document.createElement('div');
+                traitDiv.className = "p-4 border border-gray-200 rounded-lg";
+                traitDiv.innerHTML = `<h3 class="text-xl font-bold text-gray-800 mb-4">${trait.trait}</h3>`;
+                const questionsDiv = document.createElement('div');
+                questionsDiv.className = 'space-y-4';
+
+                trait.questions.forEach((q, qIndex) => {
+                    const questionId = `emi-q-${traitIndex}-${qIndex}`;
+                    questionsDiv.innerHTML += `
+                        <div class="p-4 border-t border-gray-100">
+                             <p class="mb-3 text-gray-700">${q.q}</p>
+                            <div class="flex justify-between items-center text-sm text-gray-500" dir="ltr">
+                                <span>کاملا مخالفم</span>
+                                <div class="flex space-x-2">
+                                    ${[1,2,3,4,5].map(val => `
+                                        <label for="${questionId}-${val}" class="flex flex-col items-center cursor-pointer">
+                                            <input type="radio" name="${questionId}" id="${questionId}-${val}" value="${val}" class="form-radio h-5 w-5 text-cyan-600" required>
+                                            <span class="mt-1">${val}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                                <span>کاملا موافقم</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                traitDiv.appendChild(questionsDiv);
+                container.appendChild(traitDiv);
+            });
+        }
+
+        function calculateEmiResults() {
+            let scores = Array(emiQuiz.length).fill(0);
+            let allAnswered = true;
+            emiQuiz.forEach((trait, traitIndex) => {
+                let traitScore = 0;
+                trait.questions.forEach((q, qIndex) => {
+                    const questionId = `emi-q-${traitIndex}-${qIndex}`;
+                    const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                    if (selected) {
+                        let value = parseInt(selected.value);
+                        if (!q.positive) {
+                            value = 6 - value;
+                        }
+                        traitScore += value;
+                    } else {
+                        allAnswered = false;
+                    }
+                });
+                scores[traitIndex] = traitScore;
+            });
+
+            if (!allAnswered) {
+                alert('لطفاً به تمام سوالات پاسخ دهید.');
+                return;
+            }
+
+            hideAllScreens();
+            const resultsContainer = document.getElementById('emi-results');
+            resultsContainer.innerHTML = '';
+
+            const resultsData = scores.map((score, index) => ({
+                score,
+                trait: emiQuiz[index].trait,
+                maxScore: emiQuiz[index].questions.length * 5
+            }));
+            
+            displayEmiInterpretation(resultsData);
+
+            screens.emiResults.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function displayEmiInterpretation(results) {
+            const container = document.getElementById('emi-results');
+            container.innerHTML = '';
+            
+            const interpretations = {
+                'نیاز به پیشرفت': {
+                    high: "<strong>نیاز به پیشرفت بالا:</strong> شما یک انگیزه درونی قوی برای رسیدن به اهداف و دستیابی به موفقیت دارید. این موتور محرک اصلی بسیاری از کارآفرینان است.",
+                    low: "<strong>نیاز به پیشرفت پایین:</strong> ممکن است رضایت بیشتری از وضعیت موجود داشته باشید. برای موفقیت در کارآفرینی، پیدا کردن یک 'چرا'ی قوی و شخصی ضروری است."
+                },
+                'ریسک‌پذیری': {
+                    high: "<strong>ریسک‌پذیری بالا:</strong> شما مایل به پذیرش عدم قطعیت برای دستیابی به پاداش‌های بزرگ‌تر هستید. این ویژگی برای نوآوری و ورود به بازارهای جدید ضروری است.",
+                    low: "<strong>ریسک‌پذیری پایین:</strong> شما امنیت و قابلیت پیش‌بینی را ترجیح می‌دهید. این می‌تواند به ساخت یک کسب‌وکار پایدار کمک کند، اما ممکن است مانع از جهش‌های بزرگ شود."
+                },
+                'نوآوری': {
+                    high: "<strong>نوآوری بالا:</strong> شما به طور طبیعی به دنبال راه‌های جدید و خلاقانه برای حل مشکلات هستید. این ذهنیت برای ایجاد مزیت رقابتی و متمایز کردن کسب‌وکارتان حیاتی است.",
+                    low: "<strong>نوآوری پایین:</strong> شما به روش‌های آزمایش‌شده و سنتی تمایل دارید. برای رقابتی ماندن، باید آگاهانه به دنبال ایده‌های جدید باشید یا با افراد نوآور همکاری کنید."
+                },
+                'خودکارآمدی': {
+                    high: "<strong>خودکارآمدی بالا:</strong> شما به توانایی‌های خود برای موفقیت ایمان دارید. این باور به شما کمک می‌کند تا با اعتماد به نفس با چالش‌ها روبرو شوید و دیگران را نیز رهبری کنید.",
+                    low: "<strong>خودکارآمدی پایین:</strong> ممکن است به توانایی‌های خود شک داشته باشید. تمرکز بر موفقیت‌های کوچک و کسب مهارت‌های جدید می‌تواند این ویژگی را تقویت کند."
+                },
+                'پشتکار': {
+                    high: "<strong>پشتکار بالا:</strong> شما در مواجهه با موانع و شکست‌ها، سرسخت و مقاوم هستید. این یکی از مهم‌ترین ویژگی‌ها برای عبور از دوران سخت کارآفرینی است.",
+                    low: "<strong>پشتکار پایین:</strong> ممکن است هنگام مواجهه با مشکلات، به سرعت انگیزه خود را از دست بدهید. داشتن یک شبکه حمایتی قوی و یادآوری اهداف بلندمدت می‌تواند به شما کمک کند."
+                }
+            };
+            
+            results.forEach(result => {
+                const minScore = result.maxScore / 5;
+                const barWidth = ((result.score - minScore) / (result.maxScore - minScore)) * 100;
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'p-4 rounded-lg bg-gray-100';
+                 resultDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-gray-800">${result.trait}</span>
+                        <span class="font-semibold text-gray-800" dir="ltr">${result.score} / ${result.maxScore}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div class="bg-cyan-500" style="width: ${barWidth}%; height:100%; border-radius: 9999px;"></div>
+                    </div>
+                     <p class="mt-2 text-gray-600">${result.score >= (result.maxScore * 0.6) ? interpretations[result.trait].high : interpretations[result.trait].low}</p>
+                 `;
+                container.appendChild(resultDiv);
+            });
         }
 
     </script>
 
 </body>
 </html>
+
